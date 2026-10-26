@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DPI Engine — Deep Packet Inspection System | Sachin Mishra</title>
+    <meta name="description" content="Advanced Deep Packet Inspection (DPI) Engine — Analyze, classify, and control network traffic by Sachin Mishra. Features SNI extraction, flow tracking, and multi-threaded processing.">
+    <meta name="author" content="Sachin Mishra">
+    <meta property="og:title" content="DPI Engine — Deep Packet Inspection System">
+    <meta property="og:description" content="Advanced network traffic analysis tool featuring TLS SNI extraction, application classification, and real-time flow tracking.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Animated Background -->
+<div class="bg-grid"></div>
+<div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+</div>
+
+<!-- Navigation -->
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <a class="nav-logo" href="#home">
+            <div class="logo-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <span>DPI<span class="logo-accent">Engine</span></span>
+        </a>
+        <div class="nav-links">
+            <a href="#features" class="nav-link">Features</a>
+            <a href="#demo" class="nav-link">Live Demo</a>
+            <a href="#architecture" class="nav-link">Architecture</a>
+            <a href="#docs" class="nav-link">Docs</a>
+        </div>
+        <div class="nav-actions">
+            <a href="https://github.com" class="btn btn-ghost" target="_blank">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                GitHub
+            </a>
+        </div>
+        <button class="nav-toggle" id="navToggle">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero" id="home">
+    <div class="container">
+        <div class="hero-badge">
+            <span class="badge-dot"></span>
+            Advanced Network Analysis Tool
+        </div>
+        <h1 class="hero-title">
+            Deep Packet<br>
+            <span class="gradient-text">Inspection Engine</span>
+        </h1>
+        <p class="hero-subtitle">
+            Enterprise-grade network traffic analysis with TLS SNI extraction, real-time flow tracking, 
+            multi-threaded processing, and intelligent application classification.
+        </p>
+        <div class="hero-cta">
+            <a href="#demo" class="btn btn-primary btn-lg">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <polygon points="5,3 19,12 5,21" fill="currentColor"/>
+                </svg>
+                Live Demo
+            </a>
+            <a href="#docs" class="btn btn-outline btn-lg">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2"/>
+                    <polyline points="14,2 14,8 20,8" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                View Docs
+            </a>
+        </div>
+        <div class="hero-stats">
+            <div class="stat">
+                <div class="stat-value" data-count="20">0</div>
+                <div class="stat-label">App Signatures</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <div class="stat-value" data-count="4">0</div>
+                <div class="stat-label">Thread Pools</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <div class="stat-value" data-count="100">0</div>
+                <div class="stat-label">% C++17</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <div class="stat-value" data-suffix="ms" data-count="1">0</div>
+                <div class="stat-label">Latency</div>
+            </div>
+        </div>
+    </div>
+    <!-- Animated packet stream -->
+    <div class="packet-stream" aria-hidden="true">
+        <div class="packet-line" id="packetStream"></div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="section" id="features">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">Core Capabilities</div>
+            <h2 class="section-title">Built for <span class="gradient-text">Performance</span></h2>
+            <p class="section-subtitle">Every component engineered for high-throughput packet analysis</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card feature-card--large">
+                <div class="feature-icon feature-icon--purple">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3>TLS/SNI Extraction</h3>
+                <p>Extract Server Name Indication from TLS Client Hello packets in plaintext — even on encrypted HTTPS traffic. Identifies the destination domain before encryption begins.</p>
+                <div class="feature-code">
+                    <div class="code-label">TLS Client Hello Parser</div>
+                    <pre class="code-block"><span class="kw">auto</span> sni = SNIExtractor::extract(
+    payload, payload_len
+);
+<span class="kw">if</span> (sni) {
+    flow.sni = *sni;
+    flow.app_type = sniToAppType(*sni);
+}</pre>
+                </div>
+                <div class="feature-tags">
+                    <span class="tag">TLS 1.0–1.3</span>
+                    <span class="tag">HTTPS</span>
+                    <span class="tag">HTTP/2</span>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon feature-icon--cyan">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="currentColor" stroke-width="2"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h3>Flow Tracking</h3>
+                <p>Stateful connection tracking using 5-tuple hashing. Each flow remembers its classification across all packets for consistent blocking decisions.</p>
+                <div class="feature-tags">
+                    <span class="tag">5-Tuple</span>
+                    <span class="tag">TCP/UDP</span>
+                    <span class="tag">Stateful</span>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon feature-icon--green">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" stroke="currentColor" stroke-width="2"/>
+                        <line x1="8" y1="21" x2="16" y2="21" stroke="currentColor" stroke-width="2"/>
+                        <line x1="12" y1="17" x2="12" y2="21" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h3>Multi-threaded Architecture</h3>
+                <p>Load Balancers dispatch packets to Fast Path workers via consistent hashing. Scales linearly with CPU cores for maximum throughput.</p>
+                <div class="feature-tags">
+                    <span class="tag">LB Threads</span>
+                    <span class="tag">FP Workers</span>
+                    <span class="tag">Lock-free</span>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon feature-icon--orange">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                        <line x1="12" y1="8" x2="12" y2="12" stroke="currentColor" stroke-width="2"/>
+                        <line x1="12" y1="16" x2="12.01" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>Smart Blocking Rules</h3>
+                <p>Block traffic by source IP, application type, or domain substring match. Rules are applied at flow level for complete connection control.</p>
+                <div class="feature-tags">
+                    <span class="tag">IP Rules</span>
+                    <span class="tag">App Rules</span>
+                    <span class="tag">Domain Rules</span>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon feature-icon--pink">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <polyline points="22,12 18,12 15,21 9,3 6,12 2,12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3>PCAP Analysis</h3>
+                <p>Read and write industry-standard PCAP files. Compatible with Wireshark captures. Produces filtered output with only allowed traffic.</p>
+                <div class="feature-tags">
+                    <span class="tag">PCAP v2.4</span>
+                    <span class="tag">Wireshark</span>
+                    <span class="tag">Filtering</span>
+                </div>
+            </div>
+
+            <div class="feature-card feature-card--highlight">
+                <div class="feature-icon feature-icon--blue">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h3>20+ App Signatures</h3>
+                <p>Identifies YouTube, Netflix, TikTok, Zoom, Discord, Spotify, WhatsApp, Telegram, and more via SNI pattern matching.</p>
+                <div class="app-chips">
+                    <span class="chip">YouTube</span>
+                    <span class="chip">Netflix</span>
+                    <span class="chip">TikTok</span>
+                    <span class="chip">Discord</span>
+                    <span class="chip">Zoom</span>
+                    <span class="chip chip-more">+15</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Live Demo Section -->
+<section class="section" id="demo">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">Interactive Demo</div>
+            <h2 class="section-title">DPI Engine <span class="gradient-text">Simulator</span></h2>
+            <p class="section-subtitle">Generate simulated network traffic and watch the engine analyze and classify packets in real-time</p>
+        </div>
+
+        <div class="demo-layout">
+            <!-- Controls -->
+            <div class="demo-controls">
+                <div class="control-section">
+                    <h3 class="control-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        Blocking Rules
+                    </h3>
+                    <div class="rule-group">
+                        <label class="rule-label">Block Applications</label>
+                        <div class="app-toggles" id="appToggles">
+                            <button class="app-toggle" data-app="YouTube">YouTube</button>
+                            <button class="app-toggle" data-app="Netflix">Netflix</button>
+                            <button class="app-toggle" data-app="TikTok">TikTok</button>
+                            <button class="app-toggle" data-app="Facebook">Facebook</button>
+                            <button class="app-toggle" data-app="Zoom">Zoom</button>
+                            <button class="app-toggle" data-app="Discord">Discord</button>
+                            <button class="app-toggle" data-app="Twitter/X">Twitter/X</button>
+                            <button class="app-toggle" data-app="Instagram">Instagram</button>
+                        </div>
+                    </div>
+                    <div class="rule-group">
+                        <label class="rule-label">Block Domain (substring)</label>
+                        <div class="input-row">
+                            <input type="text" id="domainInput" class="ctrl-input" placeholder="e.g., tiktok">
+                            <button class="btn btn-sm btn-primary" id="addDomainBtn">Add</button>
+                        </div>
+                        <div class="domain-tags" id="domainTags"></div>
+                    </div>
+                    <div class="rule-group">
+                        <label class="rule-label">Block Source IP</label>
+                        <div class="input-row">
+                            <input type="text" id="ipInput" class="ctrl-input" placeholder="e.g., 192.168.1.50">
+                            <button class="btn btn-sm btn-primary" id="addIpBtn">Block</button>
+                        </div>
+                        <div class="domain-tags" id="ipTags"></div>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h3 class="control-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        Traffic Generator
+                    </h3>
+                    <div class="rule-group">
+                        <label class="rule-label">Packets per batch</label>
+                        <input type="range" id="packetSlider" min="5" max="50" value="15" class="range-slider">
+                        <div class="range-value"><span id="packetCount">15</span> packets</div>
+                    </div>
+                    <div class="rule-group">
+                        <label class="rule-label">Speed</label>
+                        <div class="speed-buttons">
+                            <button class="speed-btn active" data-speed="200">Slow</button>
+                            <button class="speed-btn" data-speed="80">Normal</button>
+                            <button class="speed-btn" data-speed="20">Fast</button>
+                        </div>
+                    </div>
+                    <div class="sim-buttons">
+                        <button class="btn btn-primary btn-block" id="startBtn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon points="5,3 19,12 5,21"/>
+                            </svg>
+                            Start Analysis
+                        </button>
+                        <button class="btn btn-ghost btn-block" id="resetBtn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <polyline points="1,4 1,10 7,10" stroke="currentColor" stroke-width="2"/>
+                                <path d="M3.51 15a9 9 0 1 0 .49-4" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Visualization -->
+            <div class="demo-main">
+                <!-- Stats Bar -->
+                <div class="demo-stats-bar">
+                    <div class="demo-stat">
+                        <div class="demo-stat-value" id="statTotal">0</div>
+                        <div class="demo-stat-label">Total Packets</div>
+                    </div>
+                    <div class="demo-stat demo-stat--green">
+                        <div class="demo-stat-value" id="statForwarded">0</div>
+                        <div class="demo-stat-label">Forwarded</div>
+                    </div>
+                    <div class="demo-stat demo-stat--red">
+                        <div class="demo-stat-value" id="statDropped">0</div>
+                        <div class="demo-stat-label">Dropped</div>
+                    </div>
+                    <div class="demo-stat demo-stat--blue">
+                        <div class="demo-stat-value" id="statFlows">0</div>
+                        <div class="demo-stat-label">Active Flows</div>
+                    </div>
+                    <div class="demo-stat demo-stat--purple">
+                        <div class="demo-stat-value" id="statBytes">0 KB</div>
+                        <div class="demo-stat-label">Data Processed</div>
+                    </div>
+                </div>
+
+                <!-- Packet Feed -->
+                <div class="packet-feed-container">
+                    <div class="feed-header">
+                        <span class="feed-title">
+                            <span class="live-dot" id="liveDot"></span>
+                            Packet Feed
+                        </span>
+                        <span class="feed-filter" id="feedFilter">All</span>
+                    </div>
+                    <div class="packet-feed" id="packetFeed">
+                        <div class="feed-empty">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" opacity="0.3">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                            <p>Click "Start Analysis" to begin</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- App Distribution Chart -->
+                <div class="chart-section">
+                    <div class="chart-header">
+                        <h4>Application Distribution</h4>
+                        <div class="chart-legend" id="chartLegend"></div>
+                    </div>
+                    <div class="chart-bars" id="chartBars">
+                        <div class="chart-empty">No data yet</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SNI Panel -->
+            <div class="demo-sidebar">
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                            <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        Detected Domains
+                    </h3>
+                    <div class="sni-list" id="sniList">
+                        <div class="sni-empty">Awaiting data...</div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                            <polyline points="22,12 18,12 15,21 9,3 6,12 2,12" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        Flow Table
+                    </h3>
+                    <div class="flow-list" id="flowList">
+                        <div class="flow-empty">No active flows</div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" stroke="currentColor" stroke-width="2"/>
+                            <line x1="4" y1="22" x2="4" y2="15" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        Thread Status
+                    </h3>
+                    <div class="thread-grid" id="threadGrid">
+                        <!-- Generated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Architecture Section -->
+<section class="section section--dark" id="architecture">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">System Design</div>
+            <h2 class="section-title">Pipeline <span class="gradient-text">Architecture</span></h2>
+            <p class="section-subtitle">Multi-threaded processing pipeline for maximum throughput</p>
+        </div>
+
+        <div class="arch-diagram">
+            <!-- Animated architecture diagram -->
+            <div class="arch-row">
+                <div class="arch-node arch-node--reader">
+                    <div class="arch-node-icon">📁</div>
+                    <div class="arch-node-label">Reader Thread</div>
+                    <div class="arch-node-sub">Reads PCAP, parses headers</div>
+                </div>
+            </div>
+            <div class="arch-arrows arch-arrows--down">
+                <div class="arch-arrow arch-arrow--1"></div>
+                <div class="arch-arrow arch-arrow--2"></div>
+            </div>
+            <div class="arch-row arch-row--dual">
+                <div class="arch-node arch-node--lb">
+                    <div class="arch-node-icon">⚖️</div>
+                    <div class="arch-node-label">Load Balancer 0</div>
+                    <div class="arch-node-sub">hash(5-tuple) % 2</div>
+                </div>
+                <div class="arch-node arch-node--lb">
+                    <div class="arch-node-icon">⚖️</div>
+                    <div class="arch-node-label">Load Balancer 1</div>
+                    <div class="arch-node-sub">hash(5-tuple) % 2</div>
+                </div>
+            </div>
+            <div class="arch-arrows arch-arrows--down arch-arrows--quad">
+                <div class="arch-arrow"></div>
+                <div class="arch-arrow"></div>
+                <div class="arch-arrow"></div>
+                <div class="arch-arrow"></div>
+            </div>
+            <div class="arch-row arch-row--quad">
+                <div class="arch-node arch-node--fp" id="archFP0">
+                    <div class="arch-node-icon">⚡</div>
+                    <div class="arch-node-label">Fast Path 0</div>
+                    <div class="arch-node-sub arch-utilization">
+                        <div class="arch-bar"><div class="arch-bar-fill" style="width:0%"></div></div>
+                    </div>
+                </div>
+                <div class="arch-node arch-node--fp" id="archFP1">
+                    <div class="arch-node-icon">⚡</div>
+                    <div class="arch-node-label">Fast Path 1</div>
+                    <div class="arch-node-sub arch-utilization">
+                        <div class="arch-bar"><div class="arch-bar-fill" style="width:0%"></div></div>
+                    </div>
+                </div>
+                <div class="arch-node arch-node--fp" id="archFP2">
+                    <div class="arch-node-icon">⚡</div>
+                    <div class="arch-node-label">Fast Path 2</div>
+                    <div class="arch-node-sub arch-utilization">
+                        <div class="arch-bar"><div class="arch-bar-fill" style="width:0%"></div></div>
+                    </div>
+                </div>
+                <div class="arch-node arch-node--fp" id="archFP3">
+                    <div class="arch-node-icon">⚡</div>
+                    <div class="arch-node-label">Fast Path 3</div>
+                    <div class="arch-node-sub arch-utilization">
+                        <div class="arch-bar"><div class="arch-bar-fill" style="width:0%"></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="arch-arrows arch-arrows--down">
+                <div class="arch-arrow"></div>
+            </div>
+            <div class="arch-row">
+                <div class="arch-node arch-node--output">
+                    <div class="arch-node-icon">💾</div>
+                    <div class="arch-node-label">Output Writer</div>
+                    <div class="arch-node-sub">Writes filtered PCAP</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arch-details">
+            <div class="arch-detail-card">
+                <div class="arch-detail-icon">🔀</div>
+                <h4>Consistent Hashing</h4>
+                <p>Same 5-tuple always routes to the same Fast Path thread, ensuring stateful flow tracking without synchronization overhead.</p>
+            </div>
+            <div class="arch-detail-card">
+                <div class="arch-detail-icon">🔒</div>
+                <h4>Thread-Safe Queues</h4>
+                <p>Bounded queues with mutex + condition variables for efficient producer-consumer communication between threads.</p>
+            </div>
+            <div class="arch-detail-card">
+                <div class="arch-detail-icon">⚛️</div>
+                <h4>Atomic Statistics</h4>
+                <p>Lock-free counters using std::atomic for real-time statistics without blocking the hot data path.</p>
+            </div>
+            <div class="arch-detail-card">
+                <div class="arch-detail-icon">📦</div>
+                <h4>Zero-Copy Packets</h4>
+                <p>std::move semantics transfer packet ownership through the pipeline without copying data buffers.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Docs / Build Section -->
+<section class="section" id="docs">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">Documentation</div>
+            <h2 class="section-title">Build & <span class="gradient-text">Deploy</span></h2>
+            <p class="section-subtitle">Cross-platform build instructions for Windows, Linux, and macOS</p>
+        </div>
+
+        <div class="docs-tabs">
+            <button class="doc-tab active" data-tab="windows">Windows (cl)</button>
+            <button class="doc-tab" data-tab="mingw">MinGW/GCC</button>
+            <button class="doc-tab" data-tab="linux">Linux/WSL</button>
+            <button class="doc-tab" data-tab="usage">Usage</button>
+        </div>
+
+        <div class="docs-content">
+            <div class="doc-panel active" id="tab-windows">
+                <div class="code-file">
+                    <div class="code-file-header">
+                        <span class="code-file-name">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            Visual Studio (MSVC) — cmd
+                        </span>
+                        <button class="copy-btn" data-copy="cl /EHsc /std:c++17 /O2 /I include /Fe:dpi_engine.exe src\dpi_mt.cpp src\pcap_reader.cpp src\packet_parser.cpp src\sni_extractor.cpp src\types.cpp">Copy</button>
+                    </div>
+                    <pre class="code-display"><span class="comment"># Build Multi-threaded version</span>
+<span class="cmd">cl</span> /EHsc /std:c++17 /O2 /I include /Fe:dpi_engine.exe ^
+    src\dpi_mt.cpp ^
+    src\pcap_reader.cpp ^
+    src\packet_parser.cpp ^
+    src\sni_extractor.cpp ^
+    src\types.cpp</pre>
+                </div>
+                <div class="code-file">
+                    <div class="code-file-header">
+                        <span class="code-file-name">Simple version</span>
+                        <button class="copy-btn" data-copy="cl /EHsc /std:c++17 /O2 /I include /Fe:dpi_simple.exe src\main_working.cpp src\pcap_reader.cpp src\packet_parser.cpp src\sni_extractor.cpp src\types.cpp">Copy</button>
+                    </div>
+                    <pre class="code-display"><span class="cmd">cl</span> /EHsc /std:c++17 /O2 /I include /Fe:dpi_simple.exe ^
+    src\main_working.cpp ^
+    src\pcap_reader.cpp ^
+    src\packet_parser.cpp ^
+    src\sni_extractor.cpp ^
+    src\types.cpp</pre>
+                </div>
+            </div>
+
+            <div class="doc-panel" id="tab-mingw">
+                <div class="code-file">
+                    <div class="code-file-header">
+                        <span class="code-file-name">MinGW-w64 / GCC — cmd</span>
+                        <button class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-display"><span class="cmd">g++</span> -std=c++17 -O2 -I include -o dpi_engine.exe ^
+    src/dpi_mt.cpp ^
+    src/pcap_reader.cpp ^
+    src/packet_parser.cpp ^
+    src/sni_extractor.cpp ^
+    src/types.cpp</pre>
+                </div>
+            </div>
+
+            <div class="doc-panel" id="tab-linux">
+                <div class="code-file">
+                    <div class="code-file-header">
+                        <span class="code-file-name">Linux / WSL / macOS — bash</span>
+                        <button class="copy-btn">Copy</button>
+                    </div>
+                    <pre class="code-display"><span class="cmd">g++</span> -std=c++17 <span class="flag">-pthread</span> -O2 -I include -o dpi_engine \
+    src/dpi_mt.cpp \
+    src/pcap_reader.cpp \
+    src/packet_parser.cpp \
+    src/sni_extractor.cpp \
+    src/types.cpp</pre>
+                </div>
+            </div>
+
+            <div class="doc-panel" id="tab-usage">
+                <div class="code-file">
+                    <div class="code-file-header">
+                        <span class="code-file-name">Basic usage</span>
+                    </div>
+                    <pre class="code-display"><span class="comment"># Process a capture file</span>
+./dpi_engine input.pcap output.pcap
+
+<span class="comment"># Block YouTube and TikTok</span>
+./dpi_engine capture.pcap filtered.pcap \
+    --block-app YouTube \
+    --block-app TikTok
+
+<span class="comment"># Block by IP and domain</span>
+./dpi_engine capture.pcap filtered.pcap \
+    --block-ip 192.168.1.50 \
+    --block-domain facebook
+
+<span class="comment"># Multi-threaded with custom thread count</span>
+./dpi_engine input.pcap output.pcap --lbs 4 --fps 4
+
+<span class="comment"># Generate test data</span>
+python3 generate_test_pcap.py</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Options Table -->
+        <div class="options-table-wrapper">
+            <h3 class="options-title">Command-line Options</h3>
+            <table class="options-table">
+                <thead>
+                    <tr>
+                        <th>Flag</th>
+                        <th>Argument</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>--block-ip</code></td>
+                        <td><code>&lt;ip&gt;</code></td>
+                        <td>Block all traffic from source IP</td>
+                        <td><code>--block-ip 10.0.0.5</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>--block-app</code></td>
+                        <td><code>&lt;app&gt;</code></td>
+                        <td>Block by application type</td>
+                        <td><code>--block-app YouTube</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>--block-domain</code></td>
+                        <td><code>&lt;domain&gt;</code></td>
+                        <td>Block by SNI substring</td>
+                        <td><code>--block-domain tiktok</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>--lbs</code></td>
+                        <td><code>&lt;n&gt;</code></td>
+                        <td>Number of Load Balancer threads</td>
+                        <td><code>--lbs 4</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>--fps</code></td>
+                        <td><code>&lt;n&gt;</code></td>
+                        <td>Fast Path threads per LB</td>
+                        <td><code>--fps 4</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="nav-logo">
+                    <div class="logo-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <span>DPI<span class="logo-accent">Engine</span></span>
+                </div>
+                <p class="footer-desc">Advanced Deep Packet Inspection system for network traffic analysis and control. Built with C++17 for maximum performance.</p>
+                <div class="footer-author">
+                    <span>Developed by</span>
+                    <strong>Sachin Mishra</strong>
+                </div>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Project</h4>
+                    <a href="#features">Features</a>
+                    <a href="#demo">Live Demo</a>
+                    <a href="#architecture">Architecture</a>
+                    <a href="#docs">Documentation</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Technology</h4>
+                    <a href="#">C++17</a>
+                    <a href="#">PCAP Format</a>
+                    <a href="#">TLS/SNI</a>
+                    <a href="#">Multi-threading</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Applications</h4>
+                    <a href="#">Network Security</a>
+                    <a href="#">Traffic Analysis</a>
+                    <a href="#">Content Filtering</a>
+                    <a href="#">QoS Management</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 DPI Engine by <strong>Sachin Mishra</strong>. All rights reserved.</p>
+            <p>Built with C++17 · No external dependencies · Cross-platform</p>
+        </div>
+    </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

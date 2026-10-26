@@ -1,0 +1,21 @@
+# Build directories and outputs
+build/
+bin/
+*.exe
+*.o
+*.obj
+*.dll
+*.so
+*.dylib
+dpi_engine
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Output & temp test files
+output.pcap
